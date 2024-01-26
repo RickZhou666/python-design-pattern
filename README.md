@@ -179,3 +179,52 @@ $ python3 --version
 
 5. Dependency Inversion Principle
     - high-level modules should not depend upon low-level ones, use abstractions
+
+
+<br><br><br><br><br><br>
+
+# 2. Builder
+
+## 2.1 Gamma Categorization
+1. design patterns are typically split into three categories
+2. this is called Gamma Categorization after Erich Gamma, one of GoF authors
+    - creational
+        - deal with the creation (construction) of objects
+        - Explicit(constructor) vs. implicity(DI, reflection, etc)
+        - wholesale (single statement) vs piecewise (step-by-step)
+    - structural
+        - concerned with the structure (e.g., class members)
+        - many patterns are wrappers that mimic the underlying class' interface
+        - stress the importance of good API design
+    - behavioral
+        - they are all different; no central theme
+
+<br><br><br>
+
+## 2.2 Builder
+1. motivation
+    - some objects are simple and can be created in a single initializer call
+    - other objects require a lot of ceremony to create
+    - having an object with 10 initializer arguments is not productive
+    - instead, opt for piecewise construction
+    - builder provides an API for constructing an object step-by-step
+
+2. formal definition 
+    - when piecewise object construction is complicated, provide an API for doing it succinctly
+
+<br><br><br>
+
+## 2.3 builder facet
+1. if a object is too complicated to build, and need involve multiple builders to anticipate
+
+<br><br><br>
+
+## 2.4 builder inheritance
+
+<br><br><br>
+
+## 2.5 Summary
+1. A builder is a separate component for building an object
+2. can either give builder an initializer or return it via a static function
+3. to make builder fluent, return self
+4. different facets of an object can be built with different builders working in tandem via a base class
