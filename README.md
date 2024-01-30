@@ -228,3 +228,19 @@ $ python3 --version
 2. can either give builder an initializer or return it via a static function
 3. to make builder fluent, return self
 4. different facets of an object can be built with different builders working in tandem via a base class
+
+<br><br><br><br><br><br>
+
+# 3. Factories
+
+## 3.1 Overview
+1. Object creation logic becomes too convoluted
+2. Initializer is not descriptive
+    - name is always __init__
+    - cannot overload with same sets of arguements with different names
+    - can turn into 'optional parameter hell'
+
+3. Wholesale object creation(non-piexewise, unlike Builder) can be outsourced to
+    - a separate method (factory method)
+    - that may exist in a separate class (factory)
+    - can create hierarchy of factories with abstract factory
