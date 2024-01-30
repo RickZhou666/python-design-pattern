@@ -174,3 +174,25 @@ print(issubclass(Manager, Developer))
 4. `__add__` 
 
 5. [emulating numeric types](https://docs.python.org/3/reference/datamodel.html#emulating-numeric-types)
+
+<br><br><br><br><br><br>
+
+# Tutorial 6: Property Decorators - Getters, Setters, and Deleters
+1. we define our email as a method, but we able to access it like a `attribute`
+```python
+    @property
+    def email(self):
+        return '{}.{}@company.com'.format(self.first, self.last)
+```
+
+2. delete attribute
+```python
+@fullname.deleter
+def fullname(self):
+    print('Delete Name!')
+    self.first = None
+    self.last = None
+
+
+del emp_1.fullname
+```
