@@ -1,7 +1,7 @@
 # we want to have different type of Employee
 
 
-from http.client import HTTPException
+from http.client import BAD_REQUEST, HTTPException
 
 
 class Employee:

@@ -154,3 +154,23 @@ print(issubclass(Manager, Developer))
 ```
 
 6. HTTPException -> Exception -> BaseException -> object
+
+
+<br><br><br><br><br><br>
+
+# Tutorial 5: special (magic/dunder) methods
+1. dunder method
+    - surrond by double underscore
+    ```python
+    def __init__(self):
+        pass
+    ```
+
+2. `repr` should be unambiguous representation of an object
+    - if we only overwrite 
+
+3. `str` should be more readble version of object
+
+4. `__add__` 
+
+5. [emulating numeric types](https://docs.python.org/3/reference/datamodel.html#emulating-numeric-types)
