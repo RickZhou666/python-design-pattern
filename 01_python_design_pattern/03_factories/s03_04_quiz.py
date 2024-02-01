@@ -6,16 +6,32 @@ class Person:
         return 'name: {}, id: {}'.format(self.id, self.name)
 
 # once initialized, it will always be there
+# =============== 1st approach start ===============
+# class PersonFactory:
+#     id = 0
+
+#     def create_person(self, name):
+#         person = Person(self.id, name)
+#         self.increase_id()
+#         return person
+
+#     def increase_id(cls):
+#         cls.id += 1
+# =============== 1st approach end ===============
+
+# =============== 2nd approach start ===============
 class PersonFactory:
     id = 0
 
     def create_person(self, name):
-        person = Person(self.id, name)
+        person = Person(PersonFactory.id, name)
         self.increase_id()
         return person
 
+    @classmethod
     def increase_id(cls):
-        cls.id += 1
+        PersonFactory.id += 1
+# =============== 2nd approach end ===============
 
     
 if __name__ == '__main__':

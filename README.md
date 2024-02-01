@@ -127,6 +127,35 @@ eval(factory_name)
 eval(factory_name)()
 ```
 
+6. diff between __init__ and __new__
+    - `__new__`  is a static method, happened before `__init__` to create a new instance
+    - `__init__` is an instance method, to initialize attibutes of a newly created object
+
+7. [diff between object and instance](https://stackoverflow.com/a/3323377/7163137)
+    - first memories occupy by the the class definition is intance
+    - all the objects which are created are called objects
+
+8. [python decorator](https://www.geeksforgeeks.org/decorators-in-python/)
+
+9. [`__call__` method](https://www.geeksforgeeks.org/__call__-in-python/)
+    - The `__call__` method enables Python programmers to write classes where the instances behave like functions and can be called like a function.
+
+10. how to read file from local
+```python
+class Database(metaclass = Singleton):
+    def __init__(self) -> None:
+        self.population = {}
+        f = open('/Users/runzhou/git/python-design-pattern/s05_singleton/capitals.txt', 'r')
+        lines = f.readlines()
+        for i in range(0, len(lines), 2):
+            self.population[lines[i].strip()] = int(lines[i + 1].strip())
+        f.close()
+```
+
+11. lambda
+    - anoyomous function
+
+
 <br><br><br><br><br><br>
 
 # 1. The solid design principles
@@ -314,3 +343,130 @@ class Point:
 2. a factory is any entity that can take care of object creation
 3. a factory can be external or reside inside the object as an inner clas
 4. hierarchies of factories can be used to create related objects
+
+<br><br><br><br><br><br>
+
+# 5. Singleton
+## 5.1 overview
+
+- `A component which is instantiated only once`
+
+1. `when discussing which patterns to drop, we found that we still love them all. (Not really - i'm in favor of dropping Singleton. Its use is almost always a design smell.)`
+
+2. Motivations
+    - for some components it only makes sense to have one in the system
+        - database repository
+            - you dont need more to waste memory
+            - dont waste processing time neither
+        - Object factory
+            - it's stateless, better to only have one
+    - e.g. the initializer call is expensive
+        - we only do it once
+        - we provide everyone with the same instance
+    - want to prevent anyone creating additional copies
+    - need to take care of lazy instantiation
+        - no need to initialize singleton until it's actually needed
+
+<br><br><br>
+
+## 5.2 Singleton allocator
+1. althogh the instance only one copy but __init__  called every time
+
+<br><br><br>
+
+
+## 5.3 Singleton decorator
+1. in this way, we can make `__init__` called once
+```python
+def singleton(any_name):
+    instances = {}
+    def wrapper(*args, **kwargs):
+        if any_name not in instances:
+            instances[any_name] = any_name(*args, **kwargs)
+        return instances[any_name]
+    return wrapper
+
+@singleton
+class Database:
+    def __init__(self) -> None:
+        print('Loading database')
+
+if __name__ == '__main__':
+    db1 = Database()
+    db2 = Database()
+    print(db1 == db2)
+
+```
+
+
+<br><br><br>
+
+## 5.4 singleton metaclass
+
+1. levetage metaclass
+```python
+from typing import Any
+
+class Singleton(type):
+    _instances = {}
+
+    def __call__(cls, *args: Any, **kwds: Any) -> Any:
+        if cls not in cls._instances:
+            cls._instances[cls] = super(Singleton, cls)\
+                .__call__(*args, **kwds)
+        return cls._instances[cls]
+
+class Database(metaclass=Singleton):
+    def __init__(self) -> None:
+        print('Loading database')
+
+if __name__ == '__main__':
+    d1 = Database()
+    d2 = Database()
+    print(d1 == d2)
+
+# output
+# >> Loading database
+# >> True
+
+```
+
+<br><br><br>
+
+# 5.5 monostate
+
+1. whenever you initialize a new instance, it will always be refering to the this shared attributes
+```python
+class Monostate:
+    __shared_state = {}
+    
+    def __new__(cls, *args, **kwargs):
+        # construct the object
+        obj = super(Monostate, cls).__new__(cls, *args, **kwargs)
+        # copy the initial state
+        obj.__dict__ = cls.__shared_state
+        return obj
+
+class CFO(Monostate):
+    def __init__(self) -> None:
+        self.name = ''
+        self.money_managed = 0
+
+    def __str__(self):
+        return f'{self.name} manages ${self.money_managed}'
+
+```
+
+<br><br><br>
+
+# 5.6 Singleton testability
+1. during singleton test for database, we should use dummy database instead of real database
+
+<br><br><br>
+
+# 5.6 Summary
+1. different reliaztions of singleton, custom allocator, decorator, metaclass
+2. laziness is easy, junt init on first requsest
+3. monostate variation
+4. testability issues
+5. [reference](https://www.geeksforgeeks.org/singleton-pattern-in-python-a-complete-guide/)
