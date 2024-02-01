@@ -103,8 +103,29 @@ $ python3 --version
 
 3. abc package - abstract base classes
 
+4. when traverse Enum class
+```python
+class AvailableDrink(Enum):
+    TEA = auto()
+    COFFEE = auto()
 
+for d in AvailableDrink:
+    print('{}, {}'.format(d.name, d.value))
+# output
+>> TEA, 1
+>> COFFEE, 2
+```
 
+5. eval()
+[link](https://stackoverflow.com/questions/3451779/how-to-dynamically-create-an-instance-of-a-class-in-python)
+ - it's dangerous, due to code injections
+```python
+# return a class 
+eval(factory_name)
+
+# return a class instance
+eval(factory_name)()
+```
 
 <br><br><br><br><br><br>
 
@@ -234,6 +255,8 @@ $ python3 --version
 # 3. Factories
 
 ## 3.1 Overview
+- what is factory in general?
+    - `a component responsible solely for the wholesale (not piecewise) creation of objects`
 1. Object creation logic becomes too convoluted
 2. Initializer is not descriptive
     - name is always __init__
@@ -244,3 +267,50 @@ $ python3 --version
     - a separate method (factory method)
     - that may exist in a separate class (factory)
     - can create hierarchy of factories with abstract factory
+
+<br><br><br>
+
+## 3.2 Factory Method
+1. if you define your system in Enum, every time you add a new member, you need modify enum and init method (constructor)
+2. use static method to create instance
+```python
+class Point:
+    def __init__(self, a, b) -> None:
+            self.x = a
+            self.y = b
+
+    @staticmethod
+    def new_cartesian_point(x, y):
+         return Point(x, y)
+    
+    @staticmethod
+    def new_polar_point(rho, theta):
+         return Point(rho * cos(theta), rho * sin(theta))
+    
+    def __str__(self) -> str:
+         return '{{x: {}, y: {}}}'.format(self.x, self.y)
+```
+
+<br><br><br>
+
+## 3.3 Factory
+1. if there is too many methods in a class, you can move and group them into another entity separately which is a class
+    - single responsibility principle
+    - 
+
+## 3.4 Abstract Factory
+1. you need a factory to prepare those instance for you
+2. in python, you dont really define abstact base class, in other strong type(java) language you will need to
+    - `but we suggest to keep it this way`
+3. steps to build
+    1. create your product in a hierarchical way
+    2. create a factory for each product
+    3. create an abstract factory that will create all the factories
+    4. use input string -> get the factory -> get the product
+
+
+## 3.5 Summary
+1. a factory method is a statis method that creates objects
+2. a factory is any entity that can take care of object creation
+3. a factory can be external or reside inside the object as an inner clas
+4. hierarchies of factories can be used to create related objects
