@@ -470,3 +470,33 @@ class CFO(Monostate):
 3. monostate variation
 4. testability issues
 5. [reference](https://www.geeksforgeeks.org/singleton-pattern-in-python-a-complete-guide/)
+
+
+
+<br><br><br><br><br><br>
+
+# 21. Strategy
+- `system behaviour partially specified at runtime`
+
+## 21.1 Overview
+- `Enables the exact behaviour of a system to be selected at run-time`
+1. Motivation
+    - Many algorithms can be decomposed into higher- and lower- level parts
+    - Making tea can be decomposed into
+        - the process of making a hot beverage (boil water, pour into cup); and 
+        - tea-specific things (put teabag into water)
+    - the high-level algorithm can then be reused for making coffee or hot chocolate
+        - supported by beverage-specific strategies
+
+<br><br><br>
+
+## 21.2 Strategy
+1. inherit from a ABC, then create differnt strategy based on that
+2. you can switch to differnt strategy at runtime
+
+<br><br><br>
+
+## 21.3 Summary
+1. define an algorithm at a high level
+2. define the interface you expect each strategy to follow
+3. provide for dynamic composition of strategies in the resulting object

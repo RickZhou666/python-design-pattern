@@ -10,6 +10,7 @@ class Singleton(type):
                 .__call__(*args, **kwds)
         return cls._instances[cls]
 
+# it's already lazy loading, when we need it, we instantiate it
 class Database(metaclass=Singleton):
     def __init__(self) -> None:
         print('Loading database')
