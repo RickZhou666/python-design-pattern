@@ -155,6 +155,10 @@ class Database(metaclass = Singleton):
 11. lambda
     - anoyomous function
 
+12. `__exit__()` method
+    - release memory after usage
+    - https://www.geeksforgeeks.org/__exit__-in-python/
+
 
 <br><br><br><br><br><br>
 
@@ -472,6 +476,55 @@ class CFO(Monostate):
 5. [reference](https://www.geeksforgeeks.org/singleton-pattern-in-python-a-complete-guide/)
 
 
+
+<br><br><br><br><br><br>
+
+# 19. Observer
+- `I'm watching you!`
+
+## 19.1 Overview
+- `An observer is an object that wishes to be informed about events happening in the system, the entity generating the events is an observable`
+1. We need to be informed when certain things happen
+    - object's property changes
+    - object does something
+    - some external event occurs
+2. We want to listen to events and be notified when they occur
+    - notifications should include userful data
+3. want to unsubscribe from events if we're no longer interessted
+
+<br><br><br>
+
+## 19.2 Events
+1. create a event class
+2. you can add function to the event
+3. you can remove function to the event
+
+<br><br><br>
+
+## 19.3 property observer
+1. obj() is short hand for `obj.__call__()`
+    - once you call the method name, it will trigger `__call__()`
+
+2. make the object you want to publish integrate with Event
+3. the one try to get msg to added into that event list
+4. when object make some changes, it will notifiy all the subscribers
+
+<br><br><br>
+
+## 19.4 property dependencies
+1. when it's 1 or 2, it's easy to handle
+
+
+<br><br><br>
+
+## 19.5 summary
+1. observer is an intrusive approach: an observable must provide an event to subscribe to
+2. subscription and unsubscription handled with addition/ remvoal of items in a list
+    - a list of function references
+3. property notifications are easy, dependent property notifications are tricky
+
+4. observer suscribe the lists, add its function reference to the list
+    - wait to be notified when the event is triggered
 
 <br><br><br><br><br><br>
 
