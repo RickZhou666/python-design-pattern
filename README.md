@@ -350,6 +350,45 @@ class Point:
 
 <br><br><br><br><br><br>
 
+
+# 4. Prototype
+- when it's easier to copy an existing object to fully initialize a new one
+- motivations:
+    - complicated objects (e.g., cars) aren't designed from scratch
+    - an existing (partially or fully constructed) design is a prototype
+    - we make a copy (clone) the prototype and customize it
+    - we make the cloning convenient (e.g., via a factory)
+
+<br><br><br>
+
+## 4.1 Prototype
+1. if we want to create a new object with part of same attributes.
+
+2. `copy.deepcopy`
+    - recursively copy an object
+
+3. reusing the existing object, and make a copy of it
+    - `copy.deepcopy` is a good way to do it
+    - `__copy__` and `__deepcopy__` are the methods to override
+
+4. `copy.copy` perform a shallow copy
+    - still using the same reference, will change both if u modified one of them
+
+<br><br><br>
+
+## 4.2 Prototype factory
+1. use factory method to create different prototype
+
+<br><br><br>
+
+## 4.3 summary
+1. to implement a prototype, partially construct an object and store it somewwhere
+2. deep copy the prototype
+3. customize the resulting instance
+4. a factory provides a convenient API for using prototypes
+
+<br><br><br><br><br><br>
+
 # 5. Singleton
 ## 5.1 overview
 
@@ -474,6 +513,50 @@ class CFO(Monostate):
 3. monostate variation
 4. testability issues
 5. [reference](https://www.geeksforgeeks.org/singleton-pattern-in-python-a-complete-guide/)
+
+
+<br><br><br><br><br><br>
+
+# 12. Proxy
+- an interface for accessing a particular resource
+- motivation
+    - you are calling foo.Bar()
+    - this assumes that foo is in the same process as Bar()
+    - what if, later on, you want to put all Foo-related operations into a separate process
+        - can you avoid changing your code?
+    - proxy to the rescue!
+        - same interface, entirely different bahavior
+    - this is called a `communitation proxy`
+        - otehr types: logging, virtual, guarding, etc
+
+<br><br><br>
+
+## 12.1 Protection proxy
+1. designed on top of the original class
+    - to provide access control
+
+<br><br><br>
+
+## 12.2 virtual proxy
+1. how can we avoid loading an image if we dont draw it
+    - sometime loading is expensive
+2. add a proxy class to do lazy loading
+    - only load object once
+
+<br><br><br>
+
+## 12.2 proxy vs decorator
+1. proxy provides an indentical interface; decorator provides an enhanced interface
+2. decorator typically aggregates (or has reference to) what it is decorating; proxy doesn't have to
+3. proxy might not enve be working with a materialized object
+
+<br><br><br>
+
+## 12.3 summary
+1. a proxy has the same interface as the underlying object
+2. to creat a proxy, simply replicate the existing interface of an object
+3. add relevant functionality to the redefined member functions
+4. different proxies (communication, logging, caching, etc) have completely different behaviors
 
 
 
