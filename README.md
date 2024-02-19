@@ -517,6 +517,29 @@ class CFO(Monostate):
 
 <br><br><br><br><br><br>
 
+# 6. Adapter
+- a construct which adapts an existing interface X to conform to the required interface Y
+
+
+<br><br><br>
+
+## 6.1 Adapter (no caching)
+
+<br><br><br>
+
+## 6.2 Adapter (with caching)
+1. we are re-generating the same data every time
+
+<br><br><br>
+
+## 6.3 Summary
+1. implementing an Adpater is easy
+2. determine the API you have and the API you need
+3. Create a component which aggregates (has a reference to, ...) the adaptee
+4. intermediate representations can pile up: use caching and other optimizations
+
+<br><br><br><br><br><br>
+
 # 12. Proxy
 - an interface for accessing a particular resource
 - motivation
