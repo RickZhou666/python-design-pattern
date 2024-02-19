@@ -659,3 +659,28 @@ class CFO(Monostate):
 1. define an algorithm at a high level
 2. define the interface you expect each strategy to follow
 3. provide for dynamic composition of strategies in the resulting object
+
+
+<br><br><br><br><br><br>
+
+# 22. Template Method
+- A high-level blueprint for an algorithm to be completed by inheritors
+- `allows us to define the 'skeleton' of the algorithm, with concrete implementations defined in subclasses`
+- motivation
+    - algo can be decomposed into common parts + specifics
+    - strategy pattern does this through composition
+        - high-level algo expects strategies to conform to an interface
+        - concrete implementations implement the interface
+    - template method does the same thing through inheritance
+        - overall algo defined in base class; make uses of abstract members
+        - inheritors override the abstract members
+        - template method invoked to get work done
+
+## 22.1 template method
+
+<br><br><br>
+
+## 22.2 summary
+1. define an algo at a high level in parent class
+2. define constituent parts as abstact methods/ properties
+3. inherit the algo class, providing necessary overrides
